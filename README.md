@@ -1,4 +1,4 @@
-# VeighNa框架的算法交易模块
+# Algorithmic Trading Module for VeighNa Framework
 
 <p align="center">
   <img src ="https://vnpy.oss-cn-shanghai.aliyuncs.com/vnpy-logo.png"/>
@@ -11,23 +11,23 @@
     <img src ="https://img.shields.io/github/license/vnpy/vnpy.svg?color=orange"/>
 </p>
 
-## 说明
+## Description
 
-AlgoTrading是用于算法交易执行的功能模块，提供多种常用的智能交易算法：TWAP、Sniper、Iceberg、BestLimit等，支持通过UI界面、CSV批量导入、外部模块访问等多种调用方式。
+AlgoTrading is a function module for algorithmic trading execution, providing a variety of commonly used smart trading algorithms: TWAP, Sniper, Iceberg, BestLimit, etc. It supports multiple calling methods through UI interface, CSV batch import, external module access, etc.
 
-## 安装
+## Installation
 
-安装环境推荐基于3.0.0版本以上的【[**VeighNa Studio**](https://www.vnpy.com)】。
+The installation environment is recommended to be based on version 3.0.0 or above of [[**VeighNa Studio**](https://edarchimbaud.com/trading-platform-veighna)].
 
-直接使用pip命令：
+Use pip command directly:
 
-```
+```bash
 pip install vnpy_algotrading
 ```
 
 
-或者下载源代码后，解压后在cmd中运行：
+Or download the source code, unzip it and run it in cmd:
 
-```
+```bash
 pip install .
 ```

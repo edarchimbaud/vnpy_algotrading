@@ -41,7 +41,7 @@ class AlgoTradingApp(BaseApp):
     app_name: str = APP_NAME
     app_module: str = __module__
     app_path: Path = Path(__file__).parent
-    display_name: str = "算法交易"
+    display_name: str = "Algorithmic trading"
     engine_class: AlgoEngine = AlgoEngine
     widget_name: str = "AlgoManager"
     icon_name: str = str(app_path.joinpath("ui", "algo.ico"))

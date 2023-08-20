@@ -1,12 +1,12 @@
-# 1.0.3版本
+# Version 1.0.3
 
-1. 调整模块设计（模板、引擎），只支持单合约算法执行交易
-2. 调整算法模板，增加默认参数和变量字段，以及对应函数传参
-3. 优化算法状态控制，增加状态枚举值，算法支持暂停和恢复运行
-4. 移除DMA算法
-5. 移除算法配置缓存和加载功能
-6. 调整图形界面，优化算法状态信息显示
+1. Adjust the module design (template, engine) to support only single-contract algorithmic execution transactions
+2. Adjust the algorithm template, add default parameters and variable fields, as well as the corresponding function parameter passing.
+3. Optimize the algorithm state control, add state enumeration values, and the algorithm supports suspension and resumption of operation.
+4. Remove the DMA algorithm
+5. Remove algorithm configuration caching and loading function
+6. Adjust the graphical interface to optimize the display of algorithm status information.
 
-# 1.0.2版本
+# Version 1.0.2
 
-1. 将模块的图标文件信息，改为完整路径字符串
+1. Change the icon file information of the module to a full path string.

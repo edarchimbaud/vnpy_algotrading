@@ -6,9 +6,9 @@ from ..template import AlgoTemplate
 
 
 class SniperAlgo(AlgoTemplate):
-    """狙击手算法类"""
+    """Sniper Algorithm Class"""
 
-    display_name: str = "Sniper 狙击手"
+    display_name: str = "Sniper"
 
     default_setting: dict = {}
 
@@ -23,18 +23,20 @@ class SniperAlgo(AlgoTemplate):
         offset: str,
         price: float,
         volume: float,
-        setting: dict
+        setting: dict,
     ) -> None:
-        """构造函数"""
-        super().__init__(algo_engine, algo_name, vt_symbol, direction, offset, price, volume, setting)
+        """Constructor"""
+        super().__init__(
+            algo_engine, algo_name, vt_symbol, direction, offset, price, volume, setting
+        )
 
-        # 变量
+        # Variables
         self.vt_orderid = ""
 
         self.put_event()
 
     def on_tick(self, tick: TickData) -> None:
-        """Tick行情回调"""
+        """Tick callback"""
         if self.vt_orderid:
             self.cancel_all()
             return
@@ -44,34 +46,30 @@ class SniperAlgo(AlgoTemplate):
                 order_volume: float = self.volume - self.traded
                 order_volume = min(order_volume, tick.ask_volume_1)
 
-                self.vt_orderid = self.buy(
-                    self.price,
-                    order_volume,
-                    offset=self.offset
-                )
+                self.vt_orderid = self.buy(self.price, order_volume, offset=self.offset)
         else:
             if tick.bid_price_1 >= self.price:
                 order_volume: float = self.volume - self.traded
                 order_volume = min(order_volume, tick.bid_volume_1)
 
                 self.vt_orderid = self.sell(
-                    self.price,
-                    order_volume,
-                    offset=self.offset
+                    self.price, order_volume, offset=self.offset
                 )
 
         self.put_event()
 
     def on_order(self, order: OrderData) -> None:
-        """委托回调"""
+        """Order callback"""
         if not order.is_active():
             self.vt_orderid = ""
             self.put_event()
 
     def on_trade(self, trade: TradeData) -> None:
-        """成交回调"""
+        """Trade callback"""
         if self.traded >= self.volume:
-            self.write_log(f"已交易数量：{self.traded}，总数量：{self.volume}")
+            self.write_log(
+                f"Traded quantity: {self.traded}, total quantity: {self.volume}"
+            )
             self.finish()
         else:
             self.put_event()

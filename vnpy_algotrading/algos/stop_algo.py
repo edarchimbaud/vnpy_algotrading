@@ -6,13 +6,11 @@ from ..template import AlgoTemplate
 
 
 class StopAlgo(AlgoTemplate):
-    """条件委托算法类"""
+    """Conditional Order Algorithm Class"""
 
-    display_name: str = "Stop 条件委托"
+    display_name: str = "Stop Conditional Order"
 
-    default_setting: dict = {
-        "price_add": 0.0
-    }
+    default_setting: dict = {"price_add": 0.0}
 
     variables: list = [
         "vt_orderid",
@@ -28,22 +26,24 @@ class StopAlgo(AlgoTemplate):
         offset: str,
         price: float,
         volume: float,
-        setting: dict
+        setting: dict,
     ) -> None:
-        """构造函数"""
-        super().__init__(algo_engine, algo_name, vt_symbol, direction, offset, price, volume, setting)
+        """Constructor"""
+        super().__init__(
+            algo_engine, algo_name, vt_symbol, direction, offset, price, volume, setting
+        )
 
-        # 参数
+        # parameters
         self.price_add: float = setting["price_add"]
 
-        # 变量
+        # variables
         self.vt_orderid: str = ""
         self.order_status: str = ""
 
         self.put_event()
 
     def on_tick(self, tick: TickData) -> None:
-        """Tick行情回调"""
+        """Tick callback"""
         if self.vt_orderid:
             return
 
@@ -54,13 +54,10 @@ class StopAlgo(AlgoTemplate):
                 if tick.limit_up:
                     price = min(price, tick.limit_up)
 
-                self.vt_orderid = self.buy(
-                    price,
-                    self.volume,
-                    offset=self.offset
-                )
+                self.vt_orderid = self.buy(price, self.volume, offset=self.offset)
                 self.write_log(
-                    f"停止单已触发，代码：{self.vt_symbol}，方向：{self.direction}, 价格：{self.price}，数量：{self.volume}，开平：{self.offset}")
+                    f"Stop order triggered, code: {self.vt_symbol}, direction: {self.direction}, price: {self.price}, quantity: {self.volume}, open and close: {self.offset}"
+                )
 
         else:
             if tick.last_price <= self.price:
@@ -69,23 +66,20 @@ class StopAlgo(AlgoTemplate):
                 if tick.limit_down:
                     price = max(price, tick.limit_down)
 
-                self.vt_orderid = self.sell(
-                    price,
-                    self.volume,
-                    offset=self.offset
-                )
+                self.vt_orderid = self.sell(price, self.volume, offset=self.offset)
                 self.write_log(
-                    f"停止单已触发，代码：{self.vt_symbol}，方向：{self.direction}, 价格：{self.price}，数量：{self.volume}，开平：{self.offset}")
+                    f"Stop order triggered, code: {self.vt_symbol}, direction: {self.direction}, price: {self.price}, quantity: {self.volume}, open and close: {self.offset}"
+                )
 
         self.put_event()
 
     def on_order(self, order: OrderData) -> None:
-        """委托回调"""
+        """Order callback"""
         self.order_status = order.status
         self.put_event()
 
     def on_trade(self, trade: TradeData) -> None:
-        """成交回调"""
+        """Trade callback"""
         if self.traded == self.volume:
             self.finish()
         self.put_event()
