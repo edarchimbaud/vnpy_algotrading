@@ -17,7 +17,7 @@ AlgoTrading is a function module for algorithmic trading execution, providing a 
 
 ## Installation
 
-The installation environment is recommended to be based on version 3.0.0 or above of [[**VeighNa Studio**](https://edarchimbaud.com/veighna-website)].
+The installation environment is recommended to be based on version 3.0.0 or above of [[**VeighNa Studio**](https://github.com/paperswithbacktest/vnpy)].
 
 Use pip command directly:
 
